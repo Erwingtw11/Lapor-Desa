@@ -4,10 +4,66 @@
 // Get a free hosted Postgres database in seconds: `npx create-db`
 
 generator client {
-  provider = "prisma-client"
-  output   = "../generated/prisma"
+  provider = "prisma-client-js"
 }
 
 datasource db {
   provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  user
+  admin
+}
+
+enum Status {
+  pending
+  diproses
+  selesai
+}
+
+model User {
+  id          String        @id @default(uuid())
+  nama        String
+  email       String        @unique
+  password    String
+  role        Role
+  created_at  DateTime      @default(now())
+
+  laporan     Laporan[]
+  notifikasi  Notifikasi[]
+}
+
+model Kategori {
+  id              Int       @id @default(autoincrement())
+  nama_kategori   String
+
+  laporan         Laporan[]
+}
+
+model Laporan {
+  id           String     @id @default(uuid())
+  judul        String
+  deskripsi    String
+  foto         String?
+  lokasi       String
+  status       Status     @default(pending)
+  created_at   DateTime   @default(now())
+
+  user_id      String
+  kategori_id  Int
+
+  user         User       @relation(fields: [user_id], references: [id])
+  kategori     Kategori   @relation(fields: [kategori_id], references: [id])
+}
+
+model Notifikasi {
+  id          String     @id @default(uuid())
+  pesan       String
+  is_read     Boolean    @default(false)
+  created_at  DateTime   @default(now())
+
+  user_id     String
+  user        User       @relation(fields: [user_id], references: [id])
 }
