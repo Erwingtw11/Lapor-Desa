@@ -5,10 +5,10 @@ export default function DashboardPage() {
 
   // dummy data dulu
   const stats = {
-    total: 2,
-    proses: 1,
-    selesai: 0,
-    ditolak: 0,
+    total: 5,
+    proses: 2,
+    selesai: 1,
+    ditolak: 1,
   };
 
   const laporanTerbaru = [
@@ -24,6 +24,20 @@ export default function DashboardPage() {
     },
   ];
 
+  const getStatusColor = (status: string) => {
+  switch (status) {
+    case "MENUNGGU":
+      return "bg-yellow-100 text-yellow-700";
+    case "DIPROSES":
+      return "bg-blue-100 text-blue-700";
+    case "SELESAI":
+      return "bg-green-100 text-green-700";
+    case "DITOLAK":
+      return "bg-red-100 text-red-700";
+    default:
+      return "bg-gray-100 text-gray-600";
+  }
+};
   return (
     <AdminLayout>
 
@@ -52,7 +66,11 @@ export default function DashboardPage() {
               <tr key={item.id} className="border-b">
                 <td className="p-2">{item.judul}</td>
                 <td className="p-2">
-                  <span className="px-2 py-1 bg-blue-100 text-blue-600 rounded text-xs">
+                  <span
+                    className={`px-2 py-1 rounded text-xs font-semibold ${getStatusColor(
+                      item.status
+                    )}`}
+                  >
                     {item.status}
                   </span>
                 </td>
