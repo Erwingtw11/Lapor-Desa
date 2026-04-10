@@ -12,58 +12,59 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-enum Role {
-  user
-  admin
-}
-
-enum Status {
-  pending
-  diproses
-  selesai
-}
-
 model User {
-  id          String        @id @default(uuid())
-  nama        String
-  email       String        @unique
-  password    String
-  role        Role
-  created_at  DateTime      @default(now())
-
-  laporan     Laporan[]
-  notifikasi  Notifikasi[]
-}
-
-model Kategori {
-  id              Int       @id @default(autoincrement())
-  nama_kategori   String
-
-  laporan         Laporan[]
+  id String @id @default(uuid())
+  nama String
+  email String @unique
+  password String
+  role Role @default(USER)
+  laporan Laporan[]
+  notifikasi Notifikasi[]
+  createdAt DateTime @default(now())
 }
 
 model Laporan {
-  id           String     @id @default(uuid())
-  judul        String
-  deskripsi    String
-  foto         String?
-  lokasi       String
-  status       Status     @default(pending)
-  created_at   DateTime   @default(now())
+  id String @id @default(uuid())
+  judul String
+  deskripsi String
+  foto String?
+  lokasi String
+  status Status @default(MENUNGGU)
+  
+  userId String
+  user User @relation(fields: [userId], references: [id])
 
-  user_id      String
-  kategori_id  Int
+  kategoriId Int
+  kategori Kategori @relation(fields: [kategoriId], references: [id])
 
-  user         User       @relation(fields: [user_id], references: [id])
-  kategori     Kategori   @relation(fields: [kategori_id], references: [id])
+  createdAt DateTime @default(now())
+}
+
+model Kategori {
+  id String @id @default(uuid())
+  nama String
+  laporan Laporan[]
 }
 
 model Notifikasi {
-  id          String     @id @default(uuid())
-  pesan       String
-  is_read     Boolean    @default(false)
-  created_at  DateTime   @default(now())
+  id String @id @ default(uuid())
+  pesan String
+  isRead Boolean @default(false)
 
-  user_id     String
-  user        User       @relation(fields: [user_id], references: [id])
+  userId String
+  user User @relation(fields: [userId], references: [id])
+
+  createdAt DateTime @default(now())
+}
+
+enum Role{
+  USER
+  ADMIN
+}
+
+enum StatusLaporan{
+  MENUNGGU
+  DIPROSES
+  SELESAI
+  DITOLAK
 }
