@@ -26,7 +26,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
         {/* Header */}
         <header className="bg-gray-800 shadow p-4 flex justify-between">
-          <h2 className="font-semibold text-2xl">Dashboard</h2>
+          <h2 className="font-semibold text-2xl text-white">Dashboard</h2>
           <button className="text-sm bg-red-500 text-white px-3 py-1 rounded">
             Logout
           </button>
