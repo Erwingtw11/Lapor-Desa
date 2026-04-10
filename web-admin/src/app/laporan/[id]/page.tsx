@@ -1,7 +1,7 @@
 export default function DetailLaporan() {
   return (
     <div>
-      <h1>Detail Laporan</h1>
+      <h1>Detail</h1>
 
       <p>Judul: Jalan rusak</p>
       <p>Status: MENUNGGU</p>

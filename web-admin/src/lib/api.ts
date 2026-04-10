@@ -7,5 +7,12 @@ export async function getLaporan() {
       status: "MENUNGGU",
       lokasi: "Desa Mulya Agung",
     },
+    {
+      id: "2",
+      judul: "Lampu Mati",
+      deskripsi: "Lampu jalan mati",
+      status: "DIPROSES",
+      lokasi: "Desa Agung Batin",
+    },
   ];
 }
