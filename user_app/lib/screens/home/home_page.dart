@@ -1,57 +1,127 @@
 import 'package:flutter/material.dart';
-import '../../services/api_services.dart';
-import '../../models/laporan_model.dart';
-import '../../widgets/status_badge.dart';
 
-class HomePage extends StatefulWidget {
+class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
-  @override
-  State<HomePage> createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  late Future<List<Laporan>> futureLaporan;
-
-  @override
-  void initState() {
-    super.initState();
-    futureLaporan = ApiService.getLaporan();
-  }
+  final List<Map<String, dynamic>> laporan = const [
+    {
+      "title": "Jalan Rusak",
+      "desc": "Jalan berlubang di daerah Sukamaju",
+      "status": "Diproses",
+    },
+    {
+      "title": "Lampu Mati",
+      "desc": "Lampu jalan tidak menyala",
+      "status": "Selesai",
+    },
+    {
+      "title": "Sampah Menumpuk",
+      "desc": "Banyak sampah di pinggir jalan",
+      "status": "Menunggu",
+    },
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Laporan Saya")),
-      body: FutureBuilder<List<Laporan>>(
-        future: futureLaporan,
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
-          }
+      appBar: AppBar(
+        title: const Text("Lapor Desa"),
+        backgroundColor: Colors.green,
+        foregroundColor: Colors.white,
+      ),
 
-          if (snapshot.hasError) {
-            return const Center(child: Text("Terjadi error"));
-          }
+      body: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          children: [
+            Container(
+              padding: const EdgeInsets.all(20),
+              width: double.infinity,
+              decoration: BoxDecoration(
+                color: Colors.green,
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: const Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Halo Warga 👋",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  SizedBox(height: 8),
+                  Text(
+                    "Laporkan masalah desa dengan mudah",
+                    style: TextStyle(color: Colors.white70),
+                  ),
+                ],
+              ),
+            ),
 
-          final data = snapshot.data!;
+            const SizedBox(height: 20),
 
-          return ListView.builder(
-            itemCount: data.length,
-            itemBuilder: (context, index) {
-              final laporan = data[index];
+            Expanded(
+              child: ListView.builder(
+                itemCount: laporan.length,
+                itemBuilder: (context, index) {
+                  final item = laporan[index];
 
-              return Card(
-                margin: const EdgeInsets.all(8),
-                child: ListTile(
-                  title: Text(laporan.judul),
-                  subtitle: Text(laporan.deskripsi),
-                  trailing: StatusBadge(status: laporan.status),
-                ),
-              );
-            },
-          );
-        },
+                  return Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(16),
+                    ),
+                    elevation: 3,
+                    margin: const EdgeInsets.only(bottom: 16),
+                    child: ListTile(
+                      contentPadding: const EdgeInsets.all(16),
+                      leading: CircleAvatar(
+                        backgroundColor: Colors.green.shade100,
+                        child: const Icon(
+                          Icons.report_problem,
+                          color: Colors.green,
+                        ),
+                      ),
+                      title: Text(
+                        item["title"],
+                        style: const TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      subtitle: Padding(
+                        padding: const EdgeInsets.only(top: 8),
+                        child: Text(item["desc"]),
+                      ),
+                      trailing: Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 12,
+                          vertical: 6,
+                        ),
+                        decoration: BoxDecoration(
+                          color: Colors.green.shade100,
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        child: Text(
+                          item["status"],
+                          style: const TextStyle(
+                            color: Colors.green,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ),
+          ],
+        ),
+      ),
+
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.green,
+        onPressed: () {},
+        child: const Icon(Icons.add, color: Colors.white),
       ),
     );
   }
