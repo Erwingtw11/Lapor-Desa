@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'screens/home/home_page.dart';
+import 'widgets/bottom_navbar.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: const HomePage(),
+      home: const BottomNavbar(),
     );
   }
 }
