@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import '../screens/home/home_page.dart';
+import '../screens/history/history_page.dart';
+import '../screens/profile/profile_page.dart';
 
 class BottomNavbar extends StatefulWidget {
   const BottomNavbar({super.key});
@@ -11,9 +14,9 @@ class _BottomNavbarState extends State<BottomNavbar> {
   int currentIndex = 0;
 
   final List<Widget> pages = [
-    const Center(child: Text("Home Page")),
-    const Center(child: Text("Riwayat Page")),
-    const Center(child: Text("Profile Page")),
+    const HomePage(),
+    const HistoryPage(),
+    const ProfilePage(),
   ];
 
   @override
