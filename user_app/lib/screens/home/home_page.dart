@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../report/report_form_page.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -120,7 +121,12 @@ class HomePage extends StatelessWidget {
 
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.green,
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const ReportFormPage()),
+          );
+        },
         child: const Icon(Icons.add, color: Colors.white),
       ),
     );
