@@ -56,6 +56,25 @@ class ProfilePage extends StatelessWidget {
               ),
               tileColor: Colors.grey.shade100,
             ),
+            const SizedBox(height: 30),
+
+            SizedBox(
+              width: double.infinity,
+              height: 50,
+              child: ElevatedButton.icon(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.red,
+                  foregroundColor: Colors.white,
+                ),
+                onPressed: () {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text("Berhasil keluar akun")),
+                  );
+                },
+                icon: const Icon(Icons.logout),
+                label: const Text("Keluar Akun"),
+              ),
+            ),
           ],
         ),
       ),
