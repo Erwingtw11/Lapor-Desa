@@ -23,6 +23,27 @@ class HomePage extends StatelessWidget {
     },
   ];
 
+  Widget statCard(String count, String title, IconData icon, Color color) {
+    return Container(
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: color.withOpacity(0.1),
+        borderRadius: BorderRadius.circular(16),
+      ),
+      child: Column(
+        children: [
+          Icon(icon, color: color),
+          const SizedBox(height: 8),
+          Text(
+            count,
+            style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          ),
+          Text(title),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -72,6 +93,34 @@ class HomePage extends StatelessWidget {
                   borderRadius: BorderRadius.circular(16),
                 ),
               ),
+            ),
+
+            const SizedBox(height: 20),
+
+            Row(
+              children: [
+                Expanded(
+                  child: statCard("3", "Total", Icons.assignment, Colors.blue),
+                ),
+                const SizedBox(width: 10),
+                Expanded(
+                  child: statCard(
+                    "1",
+                    "Proses",
+                    Icons.hourglass_bottom,
+                    Colors.orange,
+                  ),
+                ),
+                const SizedBox(width: 10),
+                Expanded(
+                  child: statCard(
+                    "1",
+                    "Selesai",
+                    Icons.check_circle,
+                    Colors.green,
+                  ),
+                ),
+              ],
             ),
 
             const SizedBox(height: 20),
@@ -144,6 +193,7 @@ class HomePage extends StatelessWidget {
           ],
         ),
       ),
+
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.green,
         onPressed: () {
