@@ -25,7 +25,9 @@ class ReportFormPage extends StatelessWidget {
                 border: OutlineInputBorder(),
               ),
             ),
+
             const SizedBox(height: 16),
+
             TextField(
               controller: descController,
               maxLines: 4,
@@ -34,7 +36,27 @@ class ReportFormPage extends StatelessWidget {
                 border: OutlineInputBorder(),
               ),
             ),
-            const SizedBox(height: 20),
+
+            const SizedBox(height: 16),
+
+            SizedBox(
+              width: double.infinity,
+              height: 50,
+              child: OutlinedButton.icon(
+                onPressed: () {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text("Fitur pilih foto akan segera tersedia"),
+                    ),
+                  );
+                },
+                icon: const Icon(Icons.image),
+                label: const Text("Pilih Foto"),
+              ),
+            ),
+
+            const SizedBox(height: 16),
+
             SizedBox(
               width: double.infinity,
               height: 50,
@@ -45,9 +67,7 @@ class ReportFormPage extends StatelessWidget {
                 ),
                 onPressed: () {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text("Laporan berhasil dibuat"),
-                    ),
+                    const SnackBar(content: Text("Laporan berhasil dibuat")),
                   );
                   Navigator.pop(context);
                 },
