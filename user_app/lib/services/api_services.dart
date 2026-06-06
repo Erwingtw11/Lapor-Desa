@@ -1,18 +1,29 @@
-import 'dart:convert';
-import 'package:http/http.dart' as http;
-import '../models/laporan_model.dart';
+class ApiServices {
+  static const String baseUrl = "http://localhost:3000/api";
 
-class ApiService {
-  static const baseUrl = "http://10.0.2.2:3000"; // NestJS kamu
+  Future<List<Map<String, dynamic>>> getReports() async {
+    return [
+      {
+        "title": "Jalan Rusak",
+        "desc": "Jalan berlubang di daerah Sukamaju",
+        "status": "Diproses",
+      },
+      {
+        "title": "Lampu Mati",
+        "desc": "Lampu jalan tidak menyala",
+        "status": "Selesai",
+      },
+    ];
+  }
 
-  static Future<List<Laporan>> getLaporan() async {
-    final response = await http.get(Uri.parse("$baseUrl/laporan"));
+  Future<bool> createReport({
+    required String title,
+    required String desc,
+  }) async {
+    return true;
+  }
 
-    if (response.statusCode == 200) {
-      List data = json.decode(response.body);
-      return data.map((e) => Laporan.fromJson(e)).toList();
-    } else {
-      throw Exception("Gagal ambil data");
-    }
+  Future<bool> uploadReportImage() async {
+    return true;
   }
 }
