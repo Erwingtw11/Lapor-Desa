@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import '../report/report_form_page.dart';
+import 'package:flutter/material.dart';
+import '../detail/detail_page.dart';
+import '../report/report_form_page.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
