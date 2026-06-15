@@ -28,11 +28,11 @@ class ReportModel {
     return ReportModel(
       id: json['id'] as int,
       userId: json['userId'] as int,
-      title: json['title'] as String,
-      description: json['description'] as String,
+      title: json['title'] as String? ?? '',
+      description: json['description'] as String? ?? '',
       image: json['image'] as String? ?? '',
-      location: json['location'] as String,
-      status: json['status'] as String,
+      location: json['location'] as String? ?? '',
+      status: json['status'] as String? ?? 'PENDING',
       createdAt: DateTime.parse(json['createdAt'] as String),
       user: json['user'] == null
           ? null

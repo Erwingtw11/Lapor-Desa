@@ -14,8 +14,8 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
-  final _emailController = TextEditingController(text: 'budi@lapordesa.id');
-  final _passwordController = TextEditingController(text: 'User123!');
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
 
   @override
   void dispose() {
@@ -184,16 +184,6 @@ class _LoginScreenState extends State<LoginScreen> {
                             );
                           },
                           child: const Text('Belum punya akun? Register di sini'),
-                        ),
-                      ),
-                      const SizedBox(height: 10),
-                      const Divider(),
-                      const SizedBox(height: 10),
-                      const Text(
-                        'Demo user: budi@lapordesa.id / User123!',
-                        style: TextStyle(
-                          fontSize: 13,
-                          color: Color(0xFF6B7A90),
                         ),
                       ),
                     ],
